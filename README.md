@@ -1,4 +1,4 @@
-# @NewCircuit/logging
+# @NewCircuit/logging.js
 A standard logging package for [@NewCircuit](https://github.com/NewCircuit)
 projects.
 
@@ -13,7 +13,7 @@ registry.
 
 Then install.
 ```sh
-npm i @NewCircuit/logging
+npm i @NewCircuit/logging.js
 ```
 
 ## Log Configuration
@@ -22,7 +22,7 @@ See [log4js configuration documentation](https://log4js-node.github.io/log4js-no
 
 ## Class Example
 ```js
-const LogFactory = require('@NewCircuit/logging');
+const LogFactory = require('@NewCircuit/logging.js');
 // Put this instance where it's globally accessible.
 const log = new LogFactory('info');
 
@@ -45,7 +45,7 @@ Output:
 
 ## Function Example
 ```js
-const LogFactory = require('@NewCircuit/logging');
+const LogFactory = require('@NewCircuit/logging.js');
 // Put this instance where it's globally accessible.
 const log = new LogFactory('info');
 

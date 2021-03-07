@@ -1,5 +1,5 @@
 {
-  "name": "@newcircuit/logging",
+  "name": "@newcircuit/logging.js",
   "version": "1.0.0",
   "description": "A standard logging package used by the NewCircuit organization",
   "main": "build/index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NewCircuit/ts-logging.git"
+    "url": "git+https://github.com/NewCircuit/logging.js.git"
   },
   "author": "NewCircuit <https://github.com/NewCircuit>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/NewCircuit/ts-logging/issues"
+    "url": "https://github.com/NewCircuit/logging.js/issues"
   },
-  "homepage": "https://github.com/NewCircuit/ts-logging#readme",
+  "homepage": "https://github.com/NewCircuit/logging.js#readme",
   "dependencies": {
     "log4js": "^6.3.0"
   }
