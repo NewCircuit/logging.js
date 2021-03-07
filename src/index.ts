@@ -19,16 +19,17 @@ export default class LoggerFactory {
 		}
 	}
 
+	// See getLogger below
 	public getLogger<T extends Object>(
 		category: string,
 		classInstance: T,
 		method?: string,
 	): log4js.Logger;
 
+	// See getLogger below
 	public getLogger<T extends Function>(
 		category: string,
 		func: T,
-		moduleName?: string,
 	): log4js.Logger;
 
 
