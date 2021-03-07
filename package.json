@@ -1,0 +1,23 @@
+{
+  "name": "@newcircuit/logging",
+  "version": "1.0.0",
+  "description": "A standard logging package used by the NewCircuit organization",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "tsc",
+    "prepublish": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NewCircuit/ts-logging.git"
+  },
+  "author": "NewCircuit <https://github.com/NewCircuit>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/NewCircuit/ts-logging/issues"
+  },
+  "homepage": "https://github.com/NewCircuit/ts-logging#readme",
+  "dependencies": {
+    "log4js": "^6.3.0"
+  }
+}
