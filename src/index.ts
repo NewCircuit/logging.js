@@ -33,6 +33,7 @@ export default class LoggerFactory {
 	public getLogger<T extends Function>(
 		category: string,
 		func: T,
+		method?: string,
 	): log4js.Logger;
 
 
