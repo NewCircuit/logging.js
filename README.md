@@ -29,7 +29,7 @@ const log = new LogFactory('info');
 class Test {
 	methodA() {
 		// The last parameter is optional.
-		const logger = log.getLogger('testing', this, 'methodA');
+		const logger = log.getLogger('main', this, 'methodA');
 		logger.info('This is a test!');
 	}
 }
@@ -51,7 +51,7 @@ const log = new LogFactory('info');
 
 function test() {
 	// The last parameter is optional.
-	const logger = log.getLogger('testing', test, 'test.js');
+	const logger = log.getLogger('main', test);
 	logger.info('This is a test!');
 }
 
@@ -60,5 +60,5 @@ test();
 
 Output:
 ```log
-[2021-03-07T14:58:22.631] [INFO] [testing] [test()]: This is a test!
+[2021-03-07T14:58:22.631] [INFO] [main] [test()]: This is a test!
 ```
