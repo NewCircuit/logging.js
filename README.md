@@ -1,5 +1,5 @@
 # @NewCircuit/logging.js
-A standard logging package for [@NewCircuit](https://github.com/NewCircuit)
+A standard logging package for [NewCircuit](https://github.com/NewCircuit)
 projects.
 
 
@@ -8,21 +8,21 @@ Make sure you have an .npmrc in your project that adds the GitHub package
 registry.
 ```sh
 # .npmrc
-@NewCircuit:registry=https://npm.pkg.github.com
+@newcircuit:registry=https://npm.pkg.github.com
 ```
 
 Then install.
 ```sh
-npm i @NewCircuit/logging.js
+npm i @newcircuit/logging.js
 ```
 
-## Log Configuration
-See [log4js configuration documentation](https://log4js-node.github.io/log4js-node/api.html)
+## Configuration
+See [log4js configuration](https://log4js-node.github.io/log4js-node/api.html)
 
 
 ## Class Example
 ```js
-const LogFactory = require('@NewCircuit/logging.js');
+const LogFactory = require('@newcircuit/logging.js');
 // Put this instance where it's globally accessible.
 const log = new LogFactory('info');
 
@@ -45,7 +45,7 @@ Output:
 
 ## Function Example
 ```js
-const LogFactory = require('@NewCircuit/logging.js');
+const LogFactory = require('@newcircuit/logging.js');
 // Put this instance where it's globally accessible.
 const log = new LogFactory('info');
 
