@@ -7,6 +7,9 @@ interface LoggingEvent extends log4js.LoggingEvent {
 	},
 }
 
+const FUNC = 'funcName';
+const CLSS = 'className';
+
 export default class LoggerFactory {
 	constructor(level: string)
 	constructor(config: log4js.Configuration)
@@ -57,7 +60,7 @@ export default class LoggerFactory {
 		const logger = log4js.getLogger(category);
 		const funcName = func.name;
 
-		logger.addContext('funcName', funcName);
+		logger.addContext(FUNC, funcName);
 
 		return logger;
 	}
@@ -70,9 +73,9 @@ export default class LoggerFactory {
 		const logger = log4js.getLogger(category);
 		const className = classInstance.constructor.name;
 	
-		logger.addContext('className', className);
+		logger.addContext(CLSS, className);
 		if (method) {
-			logger.addContext('funcName', method);
+			logger.addContext(FUNC, method);
 		}
 
 		return logger;
