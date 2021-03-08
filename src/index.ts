@@ -69,8 +69,11 @@ export default class LoggerFactory {
 		      		tokens: {
 			      		call: (event: LoggingEvent) => {
 			      			const { className, funcName } = event.context;
-			      			if (className) {
+			      			if (className && funcName) {
 			      				return `[${className}.${funcName}()]`;
+			      			}
+			      			if (className) {
+			      				return `[${className}]`;
 			      			}
 			      			return `[${funcName}()]`;
 			      		},
