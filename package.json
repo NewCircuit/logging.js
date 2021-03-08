@@ -1,6 +1,6 @@
 {
   "name": "@newcircuit/logging.js",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A standard logging package used by the NewCircuit organization",
   "main": "build/index.js",
   "scripts": {

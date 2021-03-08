@@ -1,12 +1,5 @@
 import * as log4js from 'log4js';
 
-interface LoggingEvent extends log4js.LoggingEvent {
-	context: {
-		className?: string,
-		funcName: string,
-	},
-}
-
 const FUNC = 'funcName';
 const CLSS = 'className';
 
@@ -54,39 +47,51 @@ export default class LoggerFactory {
 		return this.getLoggerClass(category, classOrFunc, method);
 	}
 
-	public static getDefaultPattern(call = true): string {
-		return `[%d] [%p] [%c]${call ? ' %x{call}' : ''}`;
+	public static getDefaultLayout(
+		pattern?: string,
+		call = true,
+	): log4js.Layout {
+		return {
+			type: 'pattern',
+			pattern: LoggerFactory.getDefaultPattern()
+				+ `${call ? '%x{call}' : ''}`
+				+ `${pattern !== undefined ? ` ${pattern}` : ''}: %m %n`,
+			tokens: {
+				call: (event: log4js.LoggingEvent) => {
+					const { className, funcName } = event.context;
+					if (className && funcName) {
+						return ` [${className}.${funcName}()]`;
+					}
+					if (className) {
+						return ` [${className}]`;
+					}
+					if (funcName) {
+						return ` [${funcName}()]`;
+					}
+					return '';
+				},
+			},
+		}
+	}
+
+	public static getDefaultPattern(): string {
+		return `[%d] [%p] [%c]`;
 	}
 
 	public static getDefaults(level: string): log4js.Configuration {
 		return {
-		  appenders: {
-		    out: {
-		    	type: 'stdout',
-		    	layout: {
-		      		type: 'pattern',
-		      		pattern: `${LoggerFactory.getDefaultPattern()}: %m%n`,
-		      		tokens: {
-			      		call: (event: LoggingEvent) => {
-			      			const { className, funcName } = event.context;
-			      			if (className && funcName) {
-			      				return `[${className}.${funcName}()]`;
-			      			}
-			      			if (className) {
-			      				return `[${className}]`;
-			      			}
-			      			return `[${funcName}()]`;
-			      		},
-		      		},
-		      	},
-		    },
-		  },
-		  categories: {
-			  	default: {
-			  		appenders: ['out'],
-			  		level,
-			  	},
-		  	}
+			appenders: {
+				out: {
+					type: 'stdout',
+					layout: LoggerFactory.getDefaultLayout(),
+				},
+			},
+			categories: {
+				default: {
+					appenders: ['out'],
+					level,
+				},
+			}
 		}
 	}
 
@@ -109,7 +114,7 @@ export default class LoggerFactory {
 	): log4js.Logger {
 		const logger = log4js.getLogger(category);
 		const className = classInstance.constructor.name;
-	
+
 		logger.addContext(CLSS, className);
 		if (method) {
 			logger.addContext(FUNC, method);
