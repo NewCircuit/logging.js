@@ -54,6 +54,10 @@ export default class LoggerFactory {
 		return this.getLoggerClass(category, classOrFunc, method);
 	}
 
+	public static getDefaultPattern(call = true): string {
+		return `[%d] [%p] [%c]${call ? ' %x{call}' : ''}: %m%n`;
+	}
+
 	public static getDefaults(level: string): log4js.Configuration {
 		return {
 		  appenders: {
@@ -61,7 +65,7 @@ export default class LoggerFactory {
 		    	type: 'stdout',
 		    	layout: {
 		      		type: 'pattern',
-		      		pattern: '[%d] [%p] [%c] %x{call}: %m%n',
+		      		pattern: LoggerFactory.getDefaultPattern(),
 		      		tokens: {
 			      		call: (event: LoggingEvent) => {
 			      			const { className, funcName } = event.context;
