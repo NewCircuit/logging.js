@@ -3,6 +3,10 @@ import * as log4js from 'log4js';
 const FUNC = 'funcName';
 const CLSS = 'className';
 
+type Tokens ={
+	[key: string]: (logEvent: log4js.LoggingEvent) => any,
+} 
+
 export default class LoggerFactory {
 	constructor(level: string)
 	constructor(config: log4js.Configuration)
@@ -50,6 +54,7 @@ export default class LoggerFactory {
 	public static getDefaultLayout(
 		pattern?: string,
 		call = true,
+		tokens?: Tokens,
 	): log4js.Layout {
 		return {
 			type: 'pattern',
@@ -70,6 +75,7 @@ export default class LoggerFactory {
 					}
 					return '';
 				},
+				...(tokens || {}),
 			},
 		}
 	}
