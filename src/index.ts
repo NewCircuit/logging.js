@@ -54,6 +54,35 @@ export default class LoggerFactory {
 		return this.getLoggerClass(category, classOrFunc, method);
 	}
 
+	public static getDefaults(level: string): log4js.Configuration {
+		return {
+		  appenders: {
+		    out: {
+		    	type: 'stdout',
+		    	layout: {
+		      		type: 'pattern',
+		      		pattern: '[%d] [%p] [%c] %x{call}: %m%n',
+		      		tokens: {
+			      		call: (event: LoggingEvent) => {
+			      			const { className, funcName } = event.context;
+			      			if (className) {
+			      				return `[${className}.${funcName}()]`;
+			      			}
+			      			return `[${funcName}()]`;
+			      		},
+		      		},
+		      	},
+		    },
+		  },
+		  categories: {
+			  	default: {
+			  		appenders: ['out'],
+			  		level,
+			  	},
+		  	}
+		}
+	}
+
 	private getLoggerFunc<T extends Function>(
 		category: string,
 		func: T,
@@ -83,33 +112,7 @@ export default class LoggerFactory {
 	}
 
 	private defaults(level: string): void {
-		const config: log4js.Configuration = {
-		  appenders: {
-		    out: {
-		    	type: 'stdout',
-		    	layout: {
-		      		type: 'pattern',
-		      		pattern: '[%d] [%p] [%c] %x{call}: %m%n',
-		      		tokens: {
-			      		call: (event: LoggingEvent) => {
-			      			const { className, funcName } = event.context;
-			      			if (className) {
-			      				return `[${className}.${funcName}()]`;
-			      			}
-			      			return `[${funcName}()]`;
-			      		},
-		      		},
-		      	},
-		    },
-		  },
-		  categories: {
-			  	default: {
-			  		appenders: ['out'],
-			  		level,
-			  	},
-		  	}
-		};
-		log4js.configure(config);
+		log4js.configure(LoggerFactory.getDefaults(level));
 	}
 
 	private configure(config: log4js.Configuration): void {
